@@ -28,14 +28,53 @@ pipeline {
         }
     }
 	post {
-		always {
-			step([$class: 'InfluxDbPublisher',
-			customData: null,
-			customDataMap: null,
-			customPrefix: null,
-			target: 'local_influxDB',
-			selectedTarget: 'local_influxDB'
-			])
+		success {
+			script {
+				currentBuild.result = "SUCCESS"
+				step([$class: 'InfluxDbPublisher',
+					customData: null,
+					customDataMap: null,
+					customPrefix: null,
+					target: 'local_influxDB',
+					selectedTarget: 'local_influxDB'
+				])
+			}
+		}
+		failure {
+			script {
+				currentBuild.result = "FAILURE"
+				step([$class: 'InfluxDbPublisher',
+					customData: null,
+					customDataMap: null,
+					customPrefix: null,
+					target: 'local_influxDB',
+					selectedTarget: 'local_influxDB'
+				])
+			}
+		}
+		unstable {
+			script {
+				currentBuild.result = "FAILURE"
+				step([$class: 'InfluxDbPublisher',
+					customData: null,
+					customDataMap: null,
+					customPrefix: null,
+					target: 'local_influxDB',
+					selectedTarget: 'local_influxDB'
+				])
+			}
+		}
+		abort {
+			script {
+				currentBuild.result = "FAILURE"
+				step([$class: 'InfluxDbPublisher',
+					customData: null,
+					customDataMap: null,
+					customPrefix: null,
+					target: 'local_influxDB',
+					selectedTarget: 'local_influxDB'
+				])
+			}
 		}
 	}
 }
