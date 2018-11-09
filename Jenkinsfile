@@ -28,7 +28,7 @@ pipeline {
 			customData: null,
 			customDataMap: null,
 			customPrefix: null,
-			target: 'local influxDB',
+			target: 'local_influxDB',
 			selectedTarget: 'local_influxDB'
 			])
 		}
