@@ -32,11 +32,7 @@ pipeline {
 			script {
 				currentBuild.result = "SUCCESS"
 				step([$class: 'InfluxDbPublisher',
-					customData: null,
-					customDataMap: null,
-					customPrefix: null,
-					target: 'local_influxDB',
-					selectedTarget: 'local_influxDB'
+					target: 'local_influxDB'
 				])
 			}
 		}
@@ -44,11 +40,7 @@ pipeline {
 			script {
 				currentBuild.result = "FAILURE"
 				step([$class: 'InfluxDbPublisher',
-					customData: null,
-					customDataMap: null,
-					customPrefix: null,
-					target: 'local_influxDB',
-					selectedTarget: 'local_influxDB'
+					target: 'local_influxDB'
 				])
 			}
 		}
@@ -56,11 +48,7 @@ pipeline {
 			script {
 				currentBuild.result = "FAILURE"
 				step([$class: 'InfluxDbPublisher',
-					customData: null,
-					customDataMap: null,
-					customPrefix: null,
-					target: 'local_influxDB',
-					selectedTarget: 'local_influxDB'
+					target: 'local_influxDB'
 				])
 			}
 		}
@@ -68,11 +56,7 @@ pipeline {
 			script {
 				currentBuild.result = "FAILURE"
 				step([$class: 'InfluxDbPublisher',
-					customData: null,
-					customDataMap: null,
-					customPrefix: null,
-					target: 'local_influxDB',
-					selectedTarget: 'local_influxDB'
+					target: 'local_influxDB'
 				])
 			}
 		}
