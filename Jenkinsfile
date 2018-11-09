@@ -64,7 +64,7 @@ pipeline {
 				])
 			}
 		}
-		abort {
+		aborted {
 			script {
 				currentBuild.result = "FAILURE"
 				step([$class: 'InfluxDbPublisher',
