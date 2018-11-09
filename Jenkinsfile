@@ -5,6 +5,7 @@ pipeline {
             args '-v /root/.m2:/root/.m2'
         }
     }
+   script {
 	try {
 	    stages {
 			stage('Build') {
@@ -42,4 +43,5 @@ pipeline {
 			selectedTarget: 'local_influxDB'
 		])
 	}
+   }
 }
