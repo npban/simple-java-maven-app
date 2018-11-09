@@ -10,6 +10,17 @@ pipeline {
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
+			post {
+				always {
+					step([$class: 'InfluxDbPublisher',
+					customData: null,
+					customDataMap: null,
+					customPrefix: null,
+					target: 'local influxDB',
+					selectedTarget: 'local_influxDB'
+					])
+				}
+			}
         }
         stage('Test') {
             steps {
@@ -27,5 +38,4 @@ pipeline {
             }
         }
     }
-   build job: 'Send data to InfluxDB'
 }
