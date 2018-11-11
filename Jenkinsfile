@@ -46,7 +46,7 @@ pipeline {
 		}
 		unstable {
 			script {
-				currentBuild.result = "FAILURE"
+				currentBuild.result = "UNSTABLE"
 				step([$class: 'InfluxDbPublisher',
 					target: 'local_influxDB'
 				])
@@ -54,7 +54,7 @@ pipeline {
 		}
 		aborted {
 			script {
-				currentBuild.result = "FAILURE"
+				currentBuild.result = "ABORTED"
 				step([$class: 'InfluxDbPublisher',
 					target: 'local_influxDB'
 				])
