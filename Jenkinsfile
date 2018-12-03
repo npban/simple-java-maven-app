@@ -21,44 +21,23 @@ pipeline {
                 }
             }
         }
+        stage('Sonarqube') {
+           environment {
+               scannerHome = tool 'SonarQubeScanner'
+           }
+           steps {
+               withSonarQubeEnv('sonarqube') {
+                  sh "${scannerHome}/bin/sonar-scanner"
+               }
+               timeout(time: 10, unit: 'MINUTES') { 
+                  waitForQualityGate abortPipeline: true
+               }
+           }
+        }
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
     }
-	post {
-		success {
-			script {
-				currentBuild.result = "SUCCESS"
-				step([$class: 'InfluxDbPublisher',
-					target: 'local_influxDB'
-				])
-			}
-		}
-		failure {
-			script {
-				currentBuild.result = "FAILURE"
-				step([$class: 'InfluxDbPublisher',
-					target: 'local_influxDB'
-				])
-			}
-		}
-		unstable {
-			script {
-				currentBuild.result = "UNSTABLE"
-				step([$class: 'InfluxDbPublisher',
-					target: 'local_influxDB'
-				])
-			}
-		}
-		aborted {
-			script {
-				currentBuild.result = "ABORTED"
-				step([$class: 'InfluxDbPublisher',
-					target: 'local_influxDB'
-				])
-			}
-		}
-	}
 }
