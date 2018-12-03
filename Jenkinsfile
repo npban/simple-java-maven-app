@@ -35,9 +35,11 @@ pipeline {
            }
         }
 	stage('Export metrics to InfluxDB') {
-	   agent { docker 'baoannguyen/sonar-exporter' }
+	   agent { 
+	      docker { image 'baoannguyen/sonar-exporter' }
+	   }
 	   steps {
-            sh 'python sonar-client.py'
+              sh 'python sonar-client.py'
 	   }
 	}
         stage('Deliver') {
