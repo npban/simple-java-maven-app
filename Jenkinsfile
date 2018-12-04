@@ -49,7 +49,7 @@ pipeline {
     	      docker { image 'baoannguyen/sonar-exporter' }
     	   }
     	   steps {
-                  sh 'python sonar-client.py'
+                  sh 'python /usr/src/app/sonar-client.py'
     	   }
     	}
     }
